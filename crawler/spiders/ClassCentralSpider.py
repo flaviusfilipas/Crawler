@@ -15,9 +15,10 @@ class QuotesSpider(scrapy.Spider):
                 print(link)
                 continue
             else:
-                return scrapy.Request(base_url + link, callback=self.parse_course_info)
+                yield scrapy.Request(base_url + link, callback=self.parse_course_info)
 
     def parse_course_info(self, response):
+        self.logger.info('Hi, this is an item page! %s', response.url)
         item = {
             'title': response.css('h1#course-title::text').get(),
             'provider': response.css('a.text-2::text').get(),
