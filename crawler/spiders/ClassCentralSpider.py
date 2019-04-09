@@ -20,15 +20,8 @@ class QuotesSpider(scrapy.Spider):
     def parse_course_info(self, response):
         self.logger.info('Hi, this is an item page! %s', response.url)
         item = {
-            'title': response.css('h1#course-title::text').get(),
-            'provider': response.css('a.text-2::text').get(),
-            'link_to_course': response.css('a#btnProviderCoursePage::attr(href)').get()
+            'title': response.css('h1#course-title::text').get().strip(' \n'),
+            'provider': response.css('a.text-2::text').get().strip(' \n'),
+            'link_to_course': response.css('a#btnProviderCoursePage::attr(href)').get().strip(' \n')
         }
         yield item
-
-    # def parse_info(self, response):
-    #     item = {
-    #         'title': response.css('h1#course-title::text').extract(),
-    #         'provider': response.css('a.text--charcoal::text').extract()
-    #     }
-    #     return item
