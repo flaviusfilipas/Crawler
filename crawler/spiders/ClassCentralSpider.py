@@ -27,7 +27,8 @@ class QuotesSpider(scrapy.Spider):
         overview_list = response.xpath('//div[@data-expand-article-target="overview"]/descendant-or-self::text()').getall()
         overview = ''.join(overview_list)
         item['overview'] = re.sub('\s+', ' ', overview).strip()
-        item['start_date'] = response.css('select#sessionOptions option::attr(content)').extract_first().split(' \n')
+        start_date = response.css('select#sessionOptions option::attr(content)').get()
+        item['start_date'] = re.sub('\s+', ' ', start_date)
         cost = response.css('li.border-box span.text-2::text').get()
         item['cost'] = re.sub('\s+', ' ', cost).strip()
         yield item
