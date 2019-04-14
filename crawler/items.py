@@ -9,6 +9,11 @@ import scrapy
 
 
 class CrawlerItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    title = scrapy.Field()
+    provider = scrapy.Field()
+    start_date = scrapy.Field()
+    overview = scrapy.Field()
+    link_to_course = scrapy.Field()
+    cost = scrapy.Field()
+
+
